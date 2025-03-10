@@ -56,12 +56,12 @@ if ingredients_list:
         ingredients_string += fruit_chosen + ' '
         # Using the pandas dataframe to filter the df on the SEARCH ON column. Extracting the first row only. 
         search_on = pd_df.loc[pd_df['FRUIT_NAME'] == fruit_chosen, 'SEARCH_ON'].iloc[0]
-        st.write('The search value for ', fruit_chosen,' is ', search_on, '.')
+        # st.write('The search value for ', fruit_chosen,' is ', search_on, '.')
         # Adding a subheader to show what fruit has been chosen. 
         st.subheader(fruit_chosen +  ' Nutrition Information') 
         # API Integration Addition 
         # For each iteration of the loop, request nutrition information about the fruit via the API. 
-        smoothiefroot_response = requests.get("https://my.smoothiefroot.com/api/fruit/" + fruit_chosen)
+        smoothiefroot_response = requests.get("https://my.smoothiefroot.com/api/fruit/" + search_on)
         # Showing the response code 
         # st.text(smoothiefroot_response)
         # Showing the json response 
@@ -69,7 +69,7 @@ if ingredients_list:
         # Showing a dataframe of the repsonse 
         st_df = st.dataframe(data=smoothiefroot_response.json(), use_container_width=True)
     # Write this string to the console. 
-    st.write(ingredients_string)
+    # st.write(ingredients_string)
 
 
     # Inserting the data into the database. 
