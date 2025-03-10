@@ -36,7 +36,8 @@ st.dataframe(data=my_dataframe, use_container_width=True)
 # Convert the Snowpark Dataframe to a Pandas DataFrame so that the .loc function can be used. 
 pd_df = my_dataframe.to_pandas()
 st.dataframe(pd_df) 
-st.stop() 
+# Stops the application to see the outputs. 
+# st.stop() 
 # Using the .multiselect method to select multiple options.
 ingredients_list = st.multiselect(
     'Choose up to 5 ingredients:'
