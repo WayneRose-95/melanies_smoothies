@@ -27,9 +27,10 @@ name_on_order = st.text_input('Name')
 # st.write('Your favourite fruit is:', fruit_option)
 # Create a dataframe selecting from the fruit_options table 
 # Returning only the fruit name column from the fruit_options table. 
-
-my_dataframe = session.table("smoothies.public.fruit_options").select(col('FRUIT_NAME'))
-# st.dataframe(data=my_dataframe, use_container_width=True)
+# NEW EDIT selecting only the SEARCH_ON column from the dataframe table 
+my_dataframe = session.table("smoothies.public.fruit_options").select(col('SEARCH_ON'))
+# Show dataframe for debugging purposes 
+st.dataframe(data=my_dataframe, use_container_width=True)
 
 # Using the .multiselect method to select multiple options.
 # smoothiefroot_response = requests.get("https://my.smoothiefroot.com/api/fruit/watermelon")
