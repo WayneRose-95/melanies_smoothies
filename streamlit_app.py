@@ -34,14 +34,21 @@ my_dataframe = session.table("smoothies.public.fruit_options").select(col('FRUIT
 # smoothiefroot_response = requests.get("https://my.smoothiefroot.com/api/fruit/watermelon")
 # st.text(smoothiefroot_response)
 # 5 ingredients are shown, but no code to enforce the limit 
-smoothiefroot_response = requests.get("https://my.smoothiefroot.com/api/fruit/watermelon")
-st.text(smoothiefroot_response)
+
 
 ingredients_list = st.multiselect(
     'Choose up to 5 ingredients:'
     , my_dataframe
     , max_selections=5
 )
+# API Integration Addition 
+smoothiefroot_response = requests.get("https://my.smoothiefroot.com/api/fruit/watermelon")
+# Showing the response code 
+st.text(smoothiefroot_response)
+# Showing the json response 
+st.text(smoothiefroot_response.json())
+# Showing a dataframe of the repsonse 
+st_df = st.dataframe(data=smoothiefroot_response.json(), use_container_width=True)
 
 if ingredients_list:
     # Printing out the contents of the ingredients_list for debugging.
