@@ -54,7 +54,7 @@ if ingredients_list:
         # Concatentate each element of the list to a new string. 
         ingredients_string += fruit_chosen + ' '
         # Adding a subheader to show what fruit has been chosen. 
-        st.subheader(fruit_chosen + 'Nutrition Information') 
+        st.subheader(fruit_chosen +  'Nutrition Information') 
         # API Integration Addition 
         # For each iteration of the loop, request nutrition information about the fruit via the API. 
         smoothiefroot_response = requests.get("https://my.smoothiefroot.com/api/fruit/" + fruit_chosen)
