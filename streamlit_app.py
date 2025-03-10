@@ -24,6 +24,7 @@ st.write('Choose the fruits you want in your custom Smoothie!')
 # )
 
 name_on_order = st.text_input('Name')
+st.write(f"The name on your smoothie will be {name_on_order}") 
 
 # st.write('Your favourite fruit is:', fruit_option)
 # Create a dataframe selecting from the fruit_options table 
