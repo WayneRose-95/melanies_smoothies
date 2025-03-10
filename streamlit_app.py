@@ -53,7 +53,7 @@ if ingredients_list:
     # st.write(ingredients_list)
     # st.text(ingredients_list)
     # for each fruit chosen 
-    ingredients_string = ' '
+    ingredients_string = ''
     for fruit_chosen in ingredients_list:
         # Concatentate each element of the list to a new string. 
         ingredients_string += fruit_chosen + ' '
