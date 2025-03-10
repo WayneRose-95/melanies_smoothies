@@ -26,6 +26,7 @@ name_on_order = st.text_input('Name')
 # st.write('Your favourite fruit is:', fruit_option)
 # Create a dataframe selecting from the fruit_options table 
 # Returning only the fruit name column from the fruit_options table. 
+
 my_dataframe = session.table("smoothies.public.fruit_options").select(col('FRUIT_NAME'))
 # st.dataframe(data=my_dataframe, use_container_width=True)
 
@@ -33,6 +34,9 @@ my_dataframe = session.table("smoothies.public.fruit_options").select(col('FRUIT
 # smoothiefroot_response = requests.get("https://my.smoothiefroot.com/api/fruit/watermelon")
 # st.text(smoothiefroot_response)
 # 5 ingredients are shown, but no code to enforce the limit 
+smoothiefroot_response = requests.get("https://my.smoothiefroot.com/api/fruit/watermelon")
+st.text(smoothiefroot_response)
+
 ingredients_list = st.multiselect(
     'Choose up to 5 ingredients:'
     , my_dataframe
