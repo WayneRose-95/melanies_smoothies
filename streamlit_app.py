@@ -10,6 +10,7 @@ helpful_links = [
     "https://github.com/Snowflake-Labs/snowflake-demo-streamlit",
     "https://docs.snowflake.com/en/release-notes/streamlit-in-snowflake"
 ]
+# Establishing a streamlit connection to snowflake 
 cnx = st.connection("snowflake")
 session = cnx.session() 
 # Write directly to the app
@@ -41,14 +42,7 @@ ingredients_list = st.multiselect(
     , my_dataframe
     , max_selections=5
 )
-# API Integration Addition 
-smoothiefroot_response = requests.get("https://my.smoothiefroot.com/api/fruit/watermelon")
-# Showing the response code 
-st.text(smoothiefroot_response)
-# Showing the json response 
-st.text(smoothiefroot_response.json())
-# Showing a dataframe of the repsonse 
-st_df = st.dataframe(data=smoothiefroot_response.json(), use_container_width=True)
+
 
 if ingredients_list:
     # Printing out the contents of the ingredients_list for debugging.
@@ -59,6 +53,17 @@ if ingredients_list:
     for fruit_chosen in ingredients_list:
         # Concatentate each element of the list to a new string. 
         ingredients_string += fruit_chosen + ' '
+        # Adding a subheader to show what fruit has been chosen. 
+        st.subheader(fruit_chosen + 'Nutrition Information') 
+        # API Integration Addition 
+        # For each iteration of the loop, request nutrition information about the fruit via the API. 
+        smoothiefroot_response = requests.get("https://my.smoothiefroot.com/api/fruit/" + fruit_chosen)
+        # Showing the response code 
+        # st.text(smoothiefroot_response)
+        # Showing the json response 
+        # st.text(smoothiefroot_response.json())
+        # Showing a dataframe of the repsonse 
+        st_df = st.dataframe(data=smoothiefroot_response.json(), use_container_width=True)
     # Write this string to the console. 
     st.write(ingredients_string)
 
