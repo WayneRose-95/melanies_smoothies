@@ -1,6 +1,7 @@
 # Import python packages
 import streamlit as st
 import requests
+import pandas as pd
 # from snowflake.snowpark.context import get_active_session
 from snowflake.snowpark.functions import col
 
@@ -32,12 +33,11 @@ my_dataframe = session.table("smoothies.public.fruit_options").select(col('SEARC
 # Show dataframe for debugging purposes 
 st.dataframe(data=my_dataframe, use_container_width=True)
 
+# Convert the Snowpark Dataframe to a Pandas DataFrame so that the .loc function can be used. 
+pd_df = my_dataframe.to_pandas()
+st.dataframe(pd_df) 
+st.stop() 
 # Using the .multiselect method to select multiple options.
-# smoothiefroot_response = requests.get("https://my.smoothiefroot.com/api/fruit/watermelon")
-# st.text(smoothiefroot_response)
-# 5 ingredients are shown, but no code to enforce the limit 
-
-
 ingredients_list = st.multiselect(
     'Choose up to 5 ingredients:'
     , my_dataframe
@@ -54,6 +54,9 @@ if ingredients_list:
     for fruit_chosen in ingredients_list:
         # Concatentate each element of the list to a new string. 
         ingredients_string += fruit_chosen + ' '
+        # Using the pandas dataframe to filter the df on the SEARCH ON column. Extracting the first row only. 
+        search_on = pd_df.loc[pd_df['FRUIT_NAME'] == fruit_chosen, 'SEARCH_ON'].iloc[0]
+        st.write('The search value for ', fruit_chosen,' is ', search_on, '.')
         # Adding a subheader to show what fruit has been chosen. 
         st.subheader(fruit_chosen +  ' Nutrition Information') 
         # API Integration Addition 
